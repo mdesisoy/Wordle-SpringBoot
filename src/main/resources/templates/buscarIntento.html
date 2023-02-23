@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Required meta tags always come first -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<title>Busqueda de intentos</title>
+<!-- ESTILOS-->
+<style >
+	@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+    .text{
+        font-size: 30px;
+        text-align: center;
+        text-size-adjust:inherit;
+        color: #cb406c;
+        font-family: 'Nunito', sans-serif;
+    }
+    .textTabla{
+        font-size: 20px;
+        text-align: center;
+        text-size-adjust:inherit;
+        color: #cb406c;
+        font-family: 'Nunito', sans-serif;
+    }
+	.title {
+		font-size: 50px;
+		text-align: center;
+		text-size-adjust:inherit;
+        color: #cb406c;
+        font-family: 'Fredoka One', cursive;
+	}
+    .bg{
+        background-color: #f4cdd9;
+    }
+</style>
+</head>
+<body class="bg">
+    <table class="table text-center auto table-danger table-striped">
+        <thead>
+            <tr>
+                <th class="title" th:colspan="${longitud}">Búsqueda de intentos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form action="/BuscarIntento" th:object="${intento}" method="POST">
+                    <td>
+                        <input type="number" name="intento" min="1" th:max="${intentos}" required autofocus />
+                        <button type="submit" class="btn btn-outline-light shadow bg-body-tertiary rounded">Busca intento</button>
+                    </td>
+                </form>
+            </tr>
+            <tr>
+                <td>
+                    <p th:text="'En tu intento ' + ${intento} + ' has puesto la palabra: '" th:class="textTabla"></p>
+                    <div class="btn btn-sm border border-light border-4 rounded-pill">
+                        <th:block class="fs-3 fw-light" th:each="letra : ${buscarIntento}" th:text="${letra.letra}"></th:block>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="btn btn-outline-light shadow bg-body-tertiary rounded" href="/Reset" role="button">Volver a comenzar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
